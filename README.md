@@ -12,3 +12,11 @@
                     .collect(Collectors.toList());
 
 **Generating 50 Customer Objects** 
+
+Returning the stream of it 
+
+
+    return Flux.range(1,50)
+        .doOnNext(i->System.out.println("Porcessig :"+i))
+        .delayElements(Duration.ofSeconds(1))
+            .map(i->new Customer(i,"customer"+i));
