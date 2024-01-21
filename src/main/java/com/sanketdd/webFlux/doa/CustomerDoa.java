@@ -42,8 +42,17 @@ public class CustomerDoa {
 
     public Flux<Customer> loadCustomerInStream(){
         return Flux.range(1,50)
+              .doOnNext(i->System.out.println("Porcessig :"+i))
                 .delayElements(Duration.ofSeconds(1))
-                .map(i->new Customer(i,"customer"+i))
-                .doOnNext(i->System.out.println("Porcessig :"+i));
+                .map(i->new Customer(i,"customer"+i));
+    }
+
+
+    public Flux<Customer> loadCustomerInStreamFlux(){
+        return Flux.range(1,50)
+                .doOnNext(i->System.out.println("Porcessig :"+ i))
+                .delayElements(Duration.ofSeconds(1))
+                .map(i->new Customer(i,"customer"+ i));
+
     }
 }
