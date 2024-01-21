@@ -20,4 +20,9 @@ public class CustomerController {
     public List<Customer> getAll(){
        return service.loadAllCustomer();
     }
+
+    @GetMapping("/delay")
+    public List<Customer> getCustomerDelay(){
+        return service.getAllCustomerDelay();
+    }
 }

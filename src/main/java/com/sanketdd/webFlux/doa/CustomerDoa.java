@@ -10,17 +10,30 @@ import java.util.stream.IntStream;
 
 @Component
 public class CustomerDoa {
-public List<Customer> getCustomer(){
+    public List<Customer> getCustomer() {
 
 
-    return IntStream.rangeClosed(1,50)
-
-//            .peek(i->System.out.println("processing count :"+i))
-
-            .mapToObj(i->new Customer(i,"customer  :"+i))
-
-            .collect(Collectors.toList());
+        return IntStream.rangeClosed(1, 50).peek(i -> System.out.println("processing count :" + i))
+                .mapToObj(i -> new Customer(i, "customer  :" + i))
+                .collect(Collectors.toList());
 
 
-}
+    }
+
+    public List<Customer> getCustomerDelay(){
+        return IntStream.rangeClosed(1,50)
+                .peek(CustomerDoa::SleepProcess)
+                .peek(i -> System.out.println("processing count :" + i))
+                .mapToObj(i->new Customer(i,"customer"+i))
+                .collect(Collectors.toList());
+    }
+
+    private static void SleepProcess(int i) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
